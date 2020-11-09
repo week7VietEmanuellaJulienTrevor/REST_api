@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using intervention_management.Models;
+
 
 
 namespace Intervention_management
@@ -27,13 +30,12 @@ namespace Intervention_management
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //For connection to MySQL
-            // services.AddCors();
+             services.AddCors();
 
-            //     services.AddDbContext<IronManContext>(options =>
-            //         options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
-            // services.AddMvc();
+            services.AddDbContext<Rocket_app_developmentContext>(opt =>
+               opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+           
+            services.AddMvc();
 
             services.AddControllers();
         }
