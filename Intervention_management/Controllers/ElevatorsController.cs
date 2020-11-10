@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using intervention_management.Models;
 
+
 namespace Intervention_management.Controllers
 {
     [Route("api/elevators")]
@@ -31,15 +32,31 @@ namespace Intervention_management.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Elevator>> GetElevator(long id)
         {
-            var elevator = await _context.Elevators.FindAsync(id);
+            var elevator = await _context.Elevators.FindAsync(id) ;
 
             if (elevator == null)
             {
                 return NotFound();
             }
 
-            return elevator;
+            var status = elevator.status;
+
+            Console.WriteLine(elevator.GetType());
+            Console.WriteLine(status);
+
+
+            return  elevator;
+            // elevator.status.ToString();
+            //elevator;
         }
+                
+        // GET: api/Elevators/not-operating
+        [HttpGet("not-operating")]
+        public async Task<ActionResult<IEnumerable<Elevator>>> GetNotOperatingElevators()
+        {
+            return await _context.Elevators.Where( e => e.status != "Active" ).ToListAsync();
+        }
+
 
         // PUT: api/Elevators/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -47,6 +64,10 @@ namespace Intervention_management.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutElevator(long id, Elevator elevator)
         {
+            var neededElevator = _context.Elevators.Where(e => e.Id == elevator.Id).FirstOrDefault<Elevator>();
+            // FindAsync(id);
+            // elevator.status = neededElevator.status;
+
             if (id != elevator.Id)
             {
                 return BadRequest();
@@ -56,6 +77,8 @@ namespace Intervention_management.Controllers
 
             try
             {
+
+
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -99,12 +122,6 @@ namespace Intervention_management.Controllers
             await _context.SaveChangesAsync();
 
             return elevator;
-        }
-        // GET: api/Elevators/5
-        [HttpGet("not-operating")]
-        public async Task<ActionResult<IEnumerable<Elevator>>> GetNotOperatingElevators()
-        {
-            return await _context.Elevators.Where( e => e.status != "Active" ).ToListAsync();
         }
 
        
