@@ -120,6 +120,55 @@ namespace Intervention_management.Controllers
 
             return NoContent();
         }
+        // PUT: api/Elevators/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> PutElevatorStatus(long id, Elevator elevator)
+        {
+            var modifiedElevator = _context.elevators.Where(e => e.Id == elevator.Id).FirstOrDefault<Elevator>();
+            // FindAsync(id);
+
+
+            if (id != elevator.Id)
+            {
+                return BadRequest();
+            }
+            
+            _context.Entry(modifiedElevator).State = EntityState.Detached;
+            _context.Entry(elevator).State = EntityState.Modified;
+
+            try
+            {
+                elevator.Id = modifiedElevator.Id;
+                elevator.model = modifiedElevator.model;
+                elevator.type_of_building = modifiedElevator.type_of_building;
+                // // elevator.status = modifiedElevator.status;
+                elevator.last_inspection_date = modifiedElevator.last_inspection_date;
+                elevator.inspection_certificate = modifiedElevator.inspection_certificate;
+                elevator.information = modifiedElevator.information;
+                elevator.notes = modifiedElevator.notes;
+                elevator.created_at = modifiedElevator.created_at;
+                elevator.updated_at = DateTime.Now;
+                elevator.column_id = modifiedElevator.column_id;
+                elevator.customer_id = modifiedElevator.customer_id;
+
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ElevatorExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
 
         // POST: api/Elevators
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
