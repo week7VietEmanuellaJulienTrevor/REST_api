@@ -100,6 +100,15 @@ namespace Intervention_management.Controllers
 
             return elevator;
         }
+        // GET: api/Elevators/5
+        [HttpGet("not-operating")]
+        public async Task<ActionResult<IEnumerable<Elevator>>> GetNotOperatingElevators()
+        {
+            return await _context.Elevators.Where( e => e.status != "Active" ).ToListAsync();
+        }
+
+       
+
 
         private bool ElevatorExists(long id)
         {
