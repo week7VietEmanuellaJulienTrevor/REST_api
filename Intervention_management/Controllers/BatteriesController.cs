@@ -74,6 +74,61 @@ namespace Intervention_management.Controllers
             return NoContent();
         }
 
+        // PUT: api/Batteries/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> PutBatteryStatus(long id, Battery battery)
+        {
+            var originalBattery = _context.batteries.Where(e => e.Id == battery.Id).FirstOrDefault<Battery>();
+
+            if (id != battery.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(originalBattery).State = EntityState.Detached;
+
+            _context.Entry(battery).State = EntityState.Modified;
+
+            try
+            {
+
+                battery.Id = originalBattery.Id;
+                battery.building_id = originalBattery.building_id;
+                battery.type_of_building = originalBattery.type_of_building;
+                battery.status = originalBattery.status;
+                battery.employee_id = originalBattery.employee_id ;
+                battery.commissioning_date = originalBattery.commissioning_date;
+                battery.last_inspection_date = originalBattery.last_inspection_date;
+                battery.operations_certificate = originalBattery.operations_certificate;
+                battery.information = originalBattery.information;
+                battery.notes = originalBattery.notes;
+                battery.created_at = originalBattery.created_at;
+                battery.updated_at = DateTime.Now;
+                battery.customer_id = originalBattery.customer_id;
+
+
+                
+
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BatteryExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
         // POST: api/Batteries
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
