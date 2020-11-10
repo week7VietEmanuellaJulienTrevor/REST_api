@@ -97,7 +97,7 @@ namespace Intervention_management.Controllers
                 battery.Id = originalBattery.Id;
                 battery.building_id = originalBattery.building_id;
                 battery.type_of_building = originalBattery.type_of_building;
-                battery.status = originalBattery.status;
+                // battery.status = originalBattery.status;
                 battery.employee_id = originalBattery.employee_id ;
                 battery.commissioning_date = originalBattery.commissioning_date;
                 battery.last_inspection_date = originalBattery.last_inspection_date;
