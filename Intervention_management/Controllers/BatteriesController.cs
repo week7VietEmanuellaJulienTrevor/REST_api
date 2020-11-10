@@ -10,7 +10,7 @@ using intervention_management.Models;
 namespace Intervention_management.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/Batteries")]
     [ApiController]
     public class BatteriesController : ControllerBase
     {

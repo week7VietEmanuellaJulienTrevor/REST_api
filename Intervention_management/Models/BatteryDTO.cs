@@ -1,8 +1,6 @@
 using System;
-using System.ComponentModel;
 
-
-public class Battery
+public class BatteryDTO
 
 {
     private DateTime _date = DateTime.Now;
