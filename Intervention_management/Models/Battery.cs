@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
-
+using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 public class Battery
 

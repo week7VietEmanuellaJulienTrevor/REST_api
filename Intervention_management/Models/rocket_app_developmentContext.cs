@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace intervention_management.Models
 {
@@ -9,6 +10,6 @@ namespace intervention_management.Models
         {
         }
 
-        public DbSet<Battery> Batteries { get; set; }
+        public DbSet<Battery> batteries { get; set; }
     }
 }
