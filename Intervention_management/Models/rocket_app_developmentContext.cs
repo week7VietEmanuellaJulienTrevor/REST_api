@@ -9,8 +9,10 @@ namespace intervention_management.Models
         {
         }
 
-        public DbSet<Battery> Batteries { get; set; }
-        public DbSet<Elevator> Elevators { get; set; }
+        public DbSet<Battery> batteries { get; set; }
+        public DbSet<Elevator> elevators { get; set; }
+        // public DbSet<ElevatorStatus> Elevators { get; set; }
+         
 
         
     }

@@ -18,4 +18,15 @@ public class Elevator
     public long column_id { get; set; }
     public long customer_id { get; set; }
 
-}
+};
+public class ElevatorStatus
+{
+    public long Id { get; set; }
+    public string status { get; set; }
+    public ElevatorStatus(long id, string Status)
+    {
+        Id = id;
+        status = Status;
+    }
+    
+};

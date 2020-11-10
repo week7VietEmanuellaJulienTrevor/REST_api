@@ -24,21 +24,69 @@ namespace Intervention_management.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Elevator>>> GetElevators()
         {
-            return await _context.Elevators.ToListAsync();
+            return await _context.elevators.ToListAsync();
         }
 
         // GET: api/Elevators/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Elevator>> GetElevator(long id)
         {
-            var elevator = await _context.Elevators.FindAsync(id);
+            var elevator = await _context.elevators.FindAsync(id);
 
             if (elevator == null)
             {
                 return NotFound();
             }
 
-            return elevator;
+            var status = elevator.status;
+
+            Console.WriteLine(elevator.GetType());
+            Console.WriteLine(status);
+
+
+            return  elevator;
+            // elevator.status.ToString();
+            //elevator;
+        }
+
+
+        // // GET: api/Elevators/5/STATUS
+        // [HttpGet("{id}/status")]
+        // public async Task<ActionResult<Elevator>> GetElevatorStatus(long id)
+        // {
+        //     var elevator = await _context.elevators.FindAsync(id) ;
+
+        //     if (elevator == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     var status = elevator.status;
+
+        //     ElevatorStatus returnedElevator = (
+        //         Id: elevator.Id,
+        //         status: status
+        //     );
+
+        //     Console.WriteLine(elevator.GetType());
+        //     Console.WriteLine(status);
+
+
+        //     return  elevator;
+        //     // elevator.status.ToString();
+        //     //elevator;
+        // }
+        
+
+
+
+
+
+        // GET: api/Elevators/not-operating
+        [HttpGet("not-operating")]
+        public async Task<ActionResult<IEnumerable<Elevator>>> GetNotOperatingElevators()
+        {
+            return await _context.elevators.Where( e => e.status != "Active" ).ToListAsync();
         }
 
         // PUT: api/Elevators/5
@@ -79,7 +127,7 @@ namespace Intervention_management.Controllers
         [HttpPost]
         public async Task<ActionResult<Elevator>> PostElevator(Elevator elevator)
         {
-            _context.Elevators.Add(elevator);
+            _context.elevators.Add(elevator);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetElevator), new { id = elevator.Id }, elevator);
@@ -89,30 +137,30 @@ namespace Intervention_management.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Elevator>> DeleteElevator(long id)
         {
-            var elevator = await _context.Elevators.FindAsync(id);
+            var elevator = await _context.elevators.FindAsync(id);
             if (elevator == null)
             {
                 return NotFound();
             }
 
-            _context.Elevators.Remove(elevator);
+            _context.elevators.Remove(elevator);
             await _context.SaveChangesAsync();
 
             return elevator;
         }
-        // GET: api/Elevators/5
-        [HttpGet("not-operating")]
-        public async Task<ActionResult<IEnumerable<Elevator>>> GetNotOperatingElevators()
-        {
-            return await _context.Elevators.Where( e => e.status != "Active" ).ToListAsync();
-        }
+        // // GET: api/Elevators/5
+        // [HttpGet("not-operating")]
+        // public async Task<ActionResult<IEnumerable<Elevator>>> GetNotOperatingElevators()
+        // {
+        //     return await _context.elevators.Where( e => e.status != "Active" ).ToListAsync();
+        // }
 
        
 
 
         private bool ElevatorExists(long id)
         {
-            return _context.Elevators.Any(e => e.Id == id);
+            return _context.elevators.Any(e => e.Id == id);
         }
     }
 }

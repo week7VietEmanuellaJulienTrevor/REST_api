@@ -25,14 +25,14 @@ namespace Intervention_management.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Battery>>> GetBatteries()
         {
-            return await _context.Batteries.ToListAsync();
+            return await _context.batteries.ToListAsync();
         }
 
         // GET: api/Batteries/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Battery>> GetBattery(long id)
         {
-            var battery = await _context.Batteries.FindAsync(id);
+            var battery = await _context.batteries.FindAsync(id);
 
             if (battery == null)
             {
@@ -80,7 +80,7 @@ namespace Intervention_management.Controllers
         [HttpPost]
         public async Task<ActionResult<Battery>> PostBattery(Battery battery)
         {
-            _context.Batteries.Add(battery);
+            _context.batteries.Add(battery);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetBattery), new { id = battery.Id }, battery);
@@ -90,13 +90,13 @@ namespace Intervention_management.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Battery>> DeleteBattery(long id)
         {
-            var battery = await _context.Batteries.FindAsync(id);
+            var battery = await _context.batteries.FindAsync(id);
             if (battery == null)
             {
                 return NotFound();
             }
 
-            _context.Batteries.Remove(battery);
+            _context.batteries.Remove(battery);
             await _context.SaveChangesAsync();
 
             return battery;
@@ -104,7 +104,7 @@ namespace Intervention_management.Controllers
 
         private bool BatteryExists(long id)
         {
-            return _context.Batteries.Any(e => e.Id == id);
+            return _context.batteries.Any(e => e.Id == id);
         }
     }
 }
