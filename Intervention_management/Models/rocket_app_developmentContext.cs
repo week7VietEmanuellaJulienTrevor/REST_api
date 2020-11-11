@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace intervention_management.Models
 {
@@ -14,6 +15,8 @@ namespace intervention_management.Models
         // public DbSet<ElevatorStatus> Elevators { get; set; }
         public DbSet<Building> buildings { get; set; }
          
+        public DbSet<Column> columns { get; set; }
+
 
         
     }

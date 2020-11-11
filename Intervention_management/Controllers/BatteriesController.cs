@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using intervention_management.Models;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace Intervention_management.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/Batteries")]
     [ApiController]
     public class BatteriesController : ControllerBase
     {
