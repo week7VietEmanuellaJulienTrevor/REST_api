@@ -176,15 +176,17 @@ namespace Intervention_management.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBuilding(long id, Building building)
         {
+            var originalBuilding = _context.buildings.Where(e => e.Id == building.Id).FirstOrDefault<Building>();
             if (id != building.Id)
             {
                 return BadRequest();
             }
-
+            _context.Entry(originalBuilding).State = EntityState.Detached;
             _context.Entry(building).State = EntityState.Modified;
 
             try
             {
+                building.updated_at = DateTime.Now;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

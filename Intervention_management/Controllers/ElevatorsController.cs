@@ -49,7 +49,7 @@ namespace Intervention_management.Controllers
             //elevator;
         }
 
-
+        // // doesn't work yet
         // // GET: api/Elevators/5/STATUS
         // [HttpGet("{id}/status")]
         // public async Task<ActionResult<Elevator>> GetElevatorStatus(long id)
@@ -95,15 +95,43 @@ namespace Intervention_management.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutElevator(long id, Elevator elevator)
         {
+            var modifiedElevator = _context.elevators.Where(e => e.Id == elevator.Id).FirstOrDefault<Elevator>();
+            // FindAsync(id);
+
+
             if (id != elevator.Id)
             {
                 return BadRequest();
             }
-
+            
+            _context.Entry(modifiedElevator).State = EntityState.Detached;
             _context.Entry(elevator).State = EntityState.Modified;
 
             try
             {
+                //  elevator.Id = modifiedElevator.Id;
+                // elevator.model = modifiedElevator.model;
+                // elevator.type_of_building = modifiedElevator.type_of_building;
+                // // elevator.status = modifiedElevator.status;
+                // elevator.last_inspection_date = modifiedElevator.last_inspection_date;
+                // elevator.inspection_certificate = modifiedElevator.inspection_certificate;
+                // elevator.information = modifiedElevator.information;
+                // elevator.notes = modifiedElevator.notes;
+                // elevator.created_at = modifiedElevator.created_at;
+                elevator.updated_at = DateTime.Now;
+                // elevator.column_id = modifiedElevator.column_id;
+                // elevator.customer_id = modifiedElevator.customer_id;
+
+            // // original code
+            // if (id != elevator.Id)
+            // {
+            //     return BadRequest();
+            // }
+
+            // _context.Entry(elevator).State = EntityState.Modified;
+
+            // try
+            // {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
