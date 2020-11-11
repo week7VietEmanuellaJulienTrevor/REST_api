@@ -106,7 +106,6 @@ namespace Intervention_management.Controllers
             return NoContent();
         }
 
-<<<<<<< HEAD
         // PUT: api/Batteries/5/status
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -164,9 +163,6 @@ namespace Intervention_management.Controllers
 
 
         // POST: api/Batteries
-=======
-        // POST: api/batteries
->>>>>>> 061b119a412ba08749bcd4a494667f899a839883
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
