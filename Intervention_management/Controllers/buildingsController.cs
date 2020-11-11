@@ -27,15 +27,86 @@ namespace Intervention_management.Controllers
             return await _context.buildings.ToListAsync();
         }
 
-        //  // GET: api/buildings
-        // [HttpGet("needing-intervention")]
-        // public async Task<ActionResult<IEnumerable<Building>>> GetbuildingsNeedingIntervention()
-        // {
-        //                 // return await _context.elevators.Where( e => e.status != "Active" ).ToListAsync();
+         // GET: api/buildings
+        [HttpGet("needing-intervention")]
 
-        //     var buildingBatterie = await _context.batteries.Where(b => b.status = "Intervention" || b.status = "intervention" ).ToListAsync();
-        //     return await _context.buildings.ToListAsync();
-        // }
+        public ActionResult<List<Building>> GetBuildingsNeedingIntervention()
+        // public async Task<ActionResult<IEnumerable<Building>>> GetbuildingsNeedingIntervention()
+        {
+                        // return await _context.elevators.Where( e => e.status != "Active" ).ToListAsync();
+
+            var BatteriesAll =  _context.batteries.ToList();
+            var BuildingsAll = _context.buildings.ToList();
+            // var ColumnsAll = _context.column.ToList();
+            var ElevatorsAll = _context.elevators.ToList();
+            // List<Column> interventionCol = new List<CannotUnloadAppDomainException>();
+            List<Elevator> interventionEle = new List<Elevator>();
+            List<Battery> interventionBatt = new List<Battery>() ;
+            List<Building> buildingsInIntervention = new List<Building>() ;
+
+            // foreach (Elevator ele in ElevatorsAll)
+            // {
+            //     if (ele.status == "Active" || ele.status == "active")
+            //     {
+            //         Int64 counter = 0;
+            //         foreach (Elevator E in interventionEle)
+            //         {
+            //             if (E.column_id == )
+            //         }
+            //     }
+            // }
+
+
+
+
+            foreach (Battery batt in BatteriesAll)
+            {
+                if (batt.status == "Active" || batt.status == "active")
+                {
+                    System.Console.WriteLine(batt.building_id);
+                    Int64 counter = 0;
+                    foreach (Battery B in interventionBatt)
+                    {   
+                        System.Console.WriteLine("int");
+                        if (B.building_id == batt.building_id)
+                        {
+                            counter ++ ;
+                        }                     
+
+                    }
+                    if (counter == 0)
+                    {
+                        interventionBatt.Add(batt);
+                    }
+                }
+            }
+            foreach (Battery batt in interventionBatt)
+            {
+                foreach (Building build in BuildingsAll)
+                {
+                    if (build.Id == long.Parse(batt.building_id))
+                    {
+                        buildingsInIntervention.Add(build);
+                    }
+                } 
+            }
+            return buildingsInIntervention;
+
+            // var buildingBatterie = await _context.batteries.Where(b => b.status == "Intervention" || b.status == "intervention" ).ToListAsync();
+            
+            // foreach (Battery batt in buildingBatterie)
+            // {
+            //   var buildingsWithBatteriesIntervention =  await _context.buildings.
+            //     Where(b => b.Id == long.Parse(batt.building_id)).ToListAsync();
+                
+            //     buildingsInIntervention.Add(buildingsWithBatteriesIntervention);
+            // }
+            
+            // IEnumerable<Building> buildingsInInterventionEnumerable = buildingsInIntervention;
+
+            // return buildingsInInterventionEnumerable;
+            // return await _context.buildings.ToListAsync();
+        }
 
         // GET: api/buildings/5
         [HttpGet("{id}")]
