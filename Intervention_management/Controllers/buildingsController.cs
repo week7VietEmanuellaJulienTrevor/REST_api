@@ -46,7 +46,7 @@ namespace Intervention_management.Controllers
 
             foreach (Elevator ele in ElevatorsAll)
             {
-                if (ele.status == "Active" || ele.status == "active")
+                if (ele.status == "Intervention" || ele.status == "intervention")
                 {
                     Int64 counter = 0;
                     foreach (Elevator E in interventionEle)
@@ -58,10 +58,49 @@ namespace Intervention_management.Controllers
                     }
                     if (counter == 0)
                     {
+                        interventionEle.Add(ele);
+                    }
+                }
+            }
+            foreach (Elevator elev in interventionEle)
+            {
+                foreach(Column col in ColumnsAll)
+                {
+                    if (col.Id == elev.column_id)
+                    {
+                        interventionCol.Add(col);
+                    }
+                }
+            }
+            foreach (Column ele in ColumnsAll)
+            {
+                if (ele.status == "Intervention" || ele.status == "intervention")
+                {
+                    Int64 counter = 0;
+                    foreach (Column E in interventionCol)
+                    {
+                        if (E.battery_id == ele.battery_id)
+                        {
+                            counter ++ ;
+                        }
+                    }
+                    if (counter == 0)
+                    {
                         interventionCol.Add(ele);
                     }
                 }
             }
+            foreach (Column col in interventionCol)
+            {
+                foreach(Battery batt in BatteriesAll)
+                {
+                    if (batt.Id == col.battery_id)
+                    {
+                        interventionBatt.Add(batt);
+                    }
+                }
+            }
+            
             
 
 
@@ -69,13 +108,13 @@ namespace Intervention_management.Controllers
 
             foreach (Battery batt in BatteriesAll)
             {
-                if (batt.status == "Active" || batt.status == "active")
+                if (batt.status == "Intervention" || batt.status == "intervention")
                 {
-                    System.Console.WriteLine(batt.building_id);
+                    // System.Console.WriteLine(batt.building_id);
                     Int64 counter = 0;
                     foreach (Battery B in interventionBatt)
                     {   
-                        System.Console.WriteLine("int");
+                        // System.Console.WriteLine("int");
                         if (B.building_id == batt.building_id)
                         {
                             counter ++ ;
@@ -98,7 +137,8 @@ namespace Intervention_management.Controllers
                     }
                 } 
             }
-            return buildingsInIntervention;
+            List<Building> buildingsInInterventionUnique = buildingsInIntervention.Distinct().ToList();
+            return buildingsInInterventionUnique;
 
             // var buildingBatterie = await _context.batteries.Where(b => b.status == "Intervention" || b.status == "intervention" ).ToListAsync();
             
