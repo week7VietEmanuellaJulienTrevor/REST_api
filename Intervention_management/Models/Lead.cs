@@ -1,7 +1,8 @@
 using System;
 
 
-public class Leads
+public class Lead
+
 {
     public long Id { get; set; }
     public string contact_full_name { get; set; }

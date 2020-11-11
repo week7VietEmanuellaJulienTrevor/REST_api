@@ -17,7 +17,8 @@ namespace intervention_management.Models
          
         public DbSet<Column> columns { get; set; }
 
-
+        public DbSet<Lead> leads { get; set; }
+        public DbSet<Customer> customers { get; set; }
         
     }
 }
