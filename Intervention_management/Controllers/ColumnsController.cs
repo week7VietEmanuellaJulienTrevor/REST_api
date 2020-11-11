@@ -47,7 +47,7 @@ namespace Intervention_management.Controllers
             return column;
         }
 
-        // GET: api/Elevators/not-operating
+        // GET: api/columns/not-operating
         [HttpGet("not-operating")]
         public async Task<ActionResult<IEnumerable<Column>>> GetNotOperatingColumns()
         {
@@ -86,7 +86,7 @@ namespace Intervention_management.Controllers
             return NoContent();
         }
 
-        // PUT: api/Elevators/5
+        // PUT: api/columns/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}/status")]
