@@ -102,6 +102,8 @@ namespace Intervention_management.Controllers
 
             return NoContent();
         }
+
+        
         private bool ColumnExists(long id)
         {
             return _context.columns.Any(e => e.Id == id);
