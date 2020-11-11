@@ -60,8 +60,9 @@ namespace Intervention_management.Controllers
         [HttpPut("{id}/status")]
         public async Task<IActionResult> PutElevatorStatus(long id, Elevator elevator)
         {
+            //save elevator in a temporary variable
             var modifiedElevator = _context.elevators.Where(e => e.Id == elevator.Id).FirstOrDefault<Elevator>();
-            // FindAsync(id);
+ 
 
 
             if (id != elevator.Id)
@@ -74,6 +75,7 @@ namespace Intervention_management.Controllers
 
             try
             {
+                // replace user input with the saved elements except the field to be change by endpoint
                 elevator.Id = modifiedElevator.Id;
                 elevator.model = modifiedElevator.model;
                 elevator.type_of_building = modifiedElevator.type_of_building;
