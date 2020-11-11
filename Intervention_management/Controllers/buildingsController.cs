@@ -37,24 +37,32 @@ namespace Intervention_management.Controllers
 
             var BatteriesAll =  _context.batteries.ToList();
             var BuildingsAll = _context.buildings.ToList();
-            // var ColumnsAll = _context.column.ToList();
+            var ColumnsAll = _context.columns.ToList();
             var ElevatorsAll = _context.elevators.ToList();
-            // List<Column> interventionCol = new List<CannotUnloadAppDomainException>();
+            List<Column> interventionCol = new List<Column>();
             List<Elevator> interventionEle = new List<Elevator>();
             List<Battery> interventionBatt = new List<Battery>() ;
             List<Building> buildingsInIntervention = new List<Building>() ;
 
-            // foreach (Elevator ele in ElevatorsAll)
-            // {
-            //     if (ele.status == "Active" || ele.status == "active")
-            //     {
-            //         Int64 counter = 0;
-            //         foreach (Elevator E in interventionEle)
-            //         {
-            //             if (E.column_id == )
-            //         }
-            //     }
-            // }
+            foreach (Elevator ele in ElevatorsAll)
+            {
+                if (ele.status == "Active" || ele.status == "active")
+                {
+                    Int64 counter = 0;
+                    foreach (Elevator E in interventionEle)
+                    {
+                        if (E.column_id == ele.column_id)
+                        {
+                            counter ++ ;
+                        }
+                    }
+                    if (counter == 0)
+                    {
+                        interventionCol.Add(ele);
+                    }
+                }
+            }
+            
 
 
 
