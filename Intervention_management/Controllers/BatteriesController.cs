@@ -22,14 +22,14 @@ namespace Intervention_management.Controllers
             _context = context;
         }
 
-        // GET: api/Batteries
+        // GET: api/batteries
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Battery>>> GetBatteries()
         {
             return await _context.batteries.ToListAsync();
         }
 
-        // GET: api/Batteries/5
+        // GET: api/batteries/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Battery>> GetBattery(long id)
         {
@@ -43,7 +43,7 @@ namespace Intervention_management.Controllers
             return battery;
         }
 
-        // PUT: api/Batteries/5
+        // PUT: api/batteries/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -106,6 +106,7 @@ namespace Intervention_management.Controllers
             return NoContent();
         }
 
+<<<<<<< HEAD
         // PUT: api/Batteries/5/status
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -163,6 +164,9 @@ namespace Intervention_management.Controllers
 
 
         // POST: api/Batteries
+=======
+        // POST: api/batteries
+>>>>>>> 061b119a412ba08749bcd4a494667f899a839883
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -174,7 +178,7 @@ namespace Intervention_management.Controllers
             return CreatedAtAction(nameof(GetBattery), new { id = battery.Id }, battery);
         }
 
-        // DELETE: api/Batteries/5
+        // DELETE: api/batteries/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Battery>> DeleteBattery(long id)
         {
