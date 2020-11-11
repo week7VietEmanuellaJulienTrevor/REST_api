@@ -27,6 +27,45 @@ namespace Intervention_management.Controllers
         {
             return await _context.leads.ToListAsync();
         }
+        
+        // Get: api/leads/open-leads
+        [HttpGet("open-leads")]
+        public ActionResult<List<Lead>> GetOpenleads()
+        {
+            List<Lead> LeadsAll = _context.leads.ToList();
+            List<Customer> CustomersAll = _context.customers.ToList();
+            List<Lead> openLeads = new List<Lead>();
+            List<Lead> recentLeads = new List<Lead>();
+            DateTime currentDate  = DateTime.Today;
+            DateTime daysAgo30 = currentDate.AddDays(-30);
+
+            foreach(Lead lead in LeadsAll)
+            {
+                if (lead.created_at > daysAgo30)
+                {
+                    recentLeads.Add(lead);
+                }
+            }
+            Int64 counter = 0;
+            foreach(Lead lead in recentLeads)
+            {
+                foreach (Customer customer in CustomersAll)
+                if (lead.company_name == customer.company_name)
+                {
+                    counter ++;
+                }
+                if (counter == 0 )
+                {
+                    openLeads.Add(lead);
+                }
+
+            }
+            
+            openLeads = openLeads.Distinct().ToList();
+            openLeads = openLeads.OrderBy(o => o.Id ).ToList(); 
+
+            return openLeads;
+        }
 
 
         // GET: api/Leads/5
