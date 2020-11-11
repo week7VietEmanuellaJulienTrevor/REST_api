@@ -27,14 +27,11 @@ namespace Intervention_management.Controllers
             return await _context.buildings.ToListAsync();
         }
 
-         // GET: api/buildings
+         // GET: api/buildings/needing-intervention
         [HttpGet("needing-intervention")]
 
         public ActionResult<List<Building>> GetBuildingsNeedingIntervention()
-        // public async Task<ActionResult<IEnumerable<Building>>> GetbuildingsNeedingIntervention()
         {
-                        // return await _context.elevators.Where( e => e.status != "Active" ).ToListAsync();
-
             var BatteriesAll =  _context.batteries.ToList();
             var BuildingsAll = _context.buildings.ToList();
             var ColumnsAll = _context.columns.ToList();
@@ -44,6 +41,7 @@ namespace Intervention_management.Controllers
             List<Battery> interventionBatt = new List<Battery>() ;
             List<Building> buildingsInIntervention = new List<Building>() ;
 
+            // select elevators that require intervention and add them to a list
             foreach (Elevator ele in ElevatorsAll)
             {
                 if (ele.status == "Intervention" || ele.status == "intervention")
@@ -62,6 +60,7 @@ namespace Intervention_management.Controllers
                     }
                 }
             }
+            // add the columns containing elevators that require intervention to a list
             foreach (Elevator elev in interventionEle)
             {
                 foreach(Column col in ColumnsAll)
@@ -72,6 +71,7 @@ namespace Intervention_management.Controllers
                     }
                 }
             }
+            // select the columns in intervention and add them to the previous list
             foreach (Column ele in ColumnsAll)
             {
                 if (ele.status == "Intervention" || ele.status == "intervention")
@@ -90,6 +90,7 @@ namespace Intervention_management.Controllers
                     }
                 }
             }
+            // put all batteries containing selected columns into a list
             foreach (Column col in interventionCol)
             {
                 foreach(Battery batt in BatteriesAll)
@@ -100,12 +101,7 @@ namespace Intervention_management.Controllers
                     }
                 }
             }
-            
-            
-
-
-
-
+            //add Batteries in intervention to the previous list
             foreach (Battery batt in BatteriesAll)
             {
                 if (batt.status == "Intervention" || batt.status == "intervention")
@@ -127,6 +123,8 @@ namespace Intervention_management.Controllers
                     }
                 }
             }
+
+            // select the Buildings containing the batteries of previous list and put them to the list
             foreach (Battery batt in interventionBatt)
             {
                 foreach (Building build in BuildingsAll)
@@ -137,25 +135,11 @@ namespace Intervention_management.Controllers
                     }
                 } 
             }
+            //format the list to remove duplicates and sort it
             List<Building> buildingsInInterventionUnique = buildingsInIntervention.Distinct().ToList();
             buildingsInInterventionUnique = buildingsInInterventionUnique.OrderBy( o => o.Id).ToList();
 
             return buildingsInInterventionUnique;
-
-            // var buildingBatterie = await _context.batteries.Where(b => b.status == "Intervention" || b.status == "intervention" ).ToListAsync();
-            
-            // foreach (Battery batt in buildingBatterie)
-            // {
-            //   var buildingsWithBatteriesIntervention =  await _context.buildings.
-            //     Where(b => b.Id == long.Parse(batt.building_id)).ToListAsync();
-                
-            //     buildingsInIntervention.Add(buildingsWithBatteriesIntervention);
-            // }
-            
-            // IEnumerable<Building> buildingsInInterventionEnumerable = buildingsInIntervention;
-
-            // return buildingsInInterventionEnumerable;
-            // return await _context.buildings.ToListAsync();
         }
 
         // GET: api/buildings/5
@@ -172,68 +156,7 @@ namespace Intervention_management.Controllers
             return building;
         }
 
-        // PUT: api/buildings/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBuilding(long id, Building building)
-        {
-            var originalBuilding = _context.buildings.Where(e => e.Id == building.Id).FirstOrDefault<Building>();
-            if (id != building.Id)
-            {
-                return BadRequest();
-            }
-            _context.Entry(originalBuilding).State = EntityState.Detached;
-            _context.Entry(building).State = EntityState.Modified;
-
-            try
-            {
-                building.updated_at = DateTime.Now;
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BuildingExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/buildings
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Building>> PostBuilding(Building building)
-        {
-            _context.buildings.Add(building);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetBuilding), new { id = building.Id }, building);
-        }
-
-        // DELETE: api/buildings/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Building>> DeleteBuilding(long id)
-        {
-            var building = await _context.buildings.FindAsync(id);
-            if (building == null)
-            {
-                return NotFound();
-            }
-
-            _context.buildings.Remove(building);
-            await _context.SaveChangesAsync();
-
-            return building;
-        }
-
+        
         private bool BuildingExists(long id)
         {
             return _context.buildings.Any(e => e.Id == id);
