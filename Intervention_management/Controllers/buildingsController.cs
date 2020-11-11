@@ -138,6 +138,8 @@ namespace Intervention_management.Controllers
                 } 
             }
             List<Building> buildingsInInterventionUnique = buildingsInIntervention.Distinct().ToList();
+            buildingsInInterventionUnique = buildingsInInterventionUnique.OrderBy( o => o.Id).ToList();
+
             return buildingsInInterventionUnique;
 
             // var buildingBatterie = await _context.batteries.Where(b => b.status == "Intervention" || b.status == "intervention" ).ToListAsync();
