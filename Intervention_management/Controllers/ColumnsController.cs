@@ -109,7 +109,7 @@ namespace Intervention_management.Controllers
                 column.Id = modifiedColumn.Id;
                 column.type_of_building = modifiedColumn.type_of_building;
                 column.number_of_floors_served = modifiedColumn.number_of_floors_served;
-                // // column.status = modifiedColumn.status;
+                // column.status = modifiedColumn.status;
                 column.information = modifiedColumn.information;
                 column.notes = modifiedColumn.notes;
                 column.created_at = modifiedColumn.created_at;
