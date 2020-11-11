@@ -86,6 +86,54 @@ namespace Intervention_management.Controllers
             return NoContent();
         }
 
+        // PUT: api/Elevators/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> PutColumnStatus(long id, Column column)
+        {
+            var modifiedColumn = _context.columns.Where(e => e.Id == column.Id).FirstOrDefault<Column>();
+            // FindAsync(id);
+
+
+            if (id != column.Id)
+            {
+                return BadRequest();
+            }
+            
+            _context.Entry(modifiedColumn).State = EntityState.Detached;
+            _context.Entry(column).State = EntityState.Modified;
+
+            try
+            {
+                column.Id = modifiedColumn.Id;
+                column.type_of_building = modifiedColumn.type_of_building;
+                column.number_of_floors_served = modifiedColumn.number_of_floors_served;
+                // // column.status = modifiedColumn.status;
+                column.information = modifiedColumn.information;
+                column.notes = modifiedColumn.notes;
+                column.created_at = modifiedColumn.created_at;
+                column.updated_at = DateTime.Now;
+                column.battery_id = modifiedColumn.battery_id;
+                column.customer_id = modifiedColumn.customer_id;
+
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ColumnExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // POST: api/columns
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
