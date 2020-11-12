@@ -34,11 +34,14 @@ namespace Intervention_management.Controllers
         {
             List<Lead> LeadsAll = _context.leads.ToList();
             List<Customer> CustomersAll = _context.customers.ToList();
+            List<User> UsersAll = _context.admin_users.ToList();
             List<Lead> openLeads = new List<Lead>();
             List<Lead> recentLeads = new List<Lead>();
+            List<User> userCustomer = new List<User>();
             DateTime currentDate  = DateTime.Today;
             DateTime daysAgo30 = currentDate.AddDays(-30);
 
+            // create a list of recent leads
             foreach(Lead lead in LeadsAll)
             {
                 if (lead.created_at > daysAgo30)
@@ -46,13 +49,49 @@ namespace Intervention_management.Controllers
                     recentLeads.Add(lead);
                 }
             }
-            Int64 counter = 0;
+
+            // create a list of users that are customers
+            foreach (User user in UsersAll)
+            {
+                foreach( Customer customer in CustomersAll)
+                {
+                    if (user.Id == customer.admin_user_id)
+                    {
+                        userCustomer.Add(user);
+                    }
+                }
+            }
+
+          
             foreach(Lead lead in recentLeads)
             {
+                Int64 counter = 0;
+                // compare customer and lead emails
                 foreach (Customer customer in CustomersAll)
-                if (lead.email == customer.email_company_contact)
                 {
-                    counter ++;
+                    if (lead.email == customer.email_company_contact)
+                    {
+                        counter ++;
+                    }
+                }
+                // compare lead and customer company name
+                if (lead.company_name != null )
+                {
+                    foreach (Customer customer in CustomersAll)
+                    {
+                        if (lead.company_name == customer.company_name)
+                        {
+                            counter ++;
+                        }
+                    }
+                }
+                // compare email linked to user id end lead email
+                foreach (User user in userCustomer)
+                {
+                    if(lead.email == user.email)
+                    {
+                        counter ++;
+                    }
                 }
                 if (counter == 0 )
                 {
