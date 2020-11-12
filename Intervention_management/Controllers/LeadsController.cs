@@ -50,7 +50,7 @@ namespace Intervention_management.Controllers
             foreach(Lead lead in recentLeads)
             {
                 foreach (Customer customer in CustomersAll)
-                if (lead.company_name == customer.company_name)
+                if (lead.email == customer.email_company_contact)
                 {
                     counter ++;
                 }
