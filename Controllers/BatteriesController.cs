@@ -43,11 +43,32 @@ namespace Intervention_management.Controllers
             return battery;
         }
 
+        // GET: api/batteries/status/5
+        [HttpGet("status/{id}")]
+        public async Task<ActionResult<String>> GetBatteryStatus(long id)
+        {
+            var battery = await _context.batteries.FindAsync(id);
+
+            if (battery == null)
+            {
+                return NotFound();
+            }
+
+            return battery.status;
+        }
+        
+        // GET: api/Elevators/not-operating
+        [HttpGet("not-operating")]
+        public async Task<ActionResult<IEnumerable<Elevator>>> GetNotOperatingElevators()
+        {
+            return await _context.elevators.Where( e => e.status != "Active" ).ToListAsync();
+        }
+
         
         // PUT: api/Batteries/5/status
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}/status")]
+        [HttpPut("status/{id}")]
         public async Task<IActionResult> PutBatteryStatus(long id, Battery battery)
         {   
             
