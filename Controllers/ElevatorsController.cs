@@ -47,6 +47,21 @@ namespace Intervention_management.Controllers
             return  elevator;
         }
 
+        // GET: api/elevators/status/5
+        [HttpGet("status/{id}")]
+        public async Task<ActionResult<String>> GetElevatorStatus(long id)
+        {
+            var elevator = await _context.elevators.FindAsync(id);
+
+            if (elevator == null)
+            {
+                return NotFound();
+            }
+
+            return elevator.status;
+        }
+
+
         // GET: api/Elevators/not-operating
         [HttpGet("not-operating")]
         public async Task<ActionResult<IEnumerable<Elevator>>> GetNotOperatingElevators()
@@ -57,7 +72,7 @@ namespace Intervention_management.Controllers
         // PUT: api/Elevators/5/status
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}/status")]
+        [HttpPut("status/{id}")]
         public async Task<IActionResult> PutElevatorStatus(long id, Elevator elevator)
         {
             //save elevator in a temporary variable
