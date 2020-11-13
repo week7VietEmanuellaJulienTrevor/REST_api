@@ -1,6 +1,15 @@
 ## Rocket Elevators REST API
 
-This week we were tasked with creating a Rest Api for rocket elevators.
+### FALL-2020-TEAM-API-2 - Week 8 Odyssey 
+
+#### TEAM MEMBERS:
+- VIET-NGA DAO "Team Leader"
+- TREVOR KITCHEN "Member"
+- EMMANUELLA DERILUS "Member"
+- ANDRE DE SANTANA "Member"
+- JULIEN DUPONT "Member"
+
+#### This week we were asked to create a Rest Api for Rocket Elevators.
 Using C# and .NET Core.
 
 The different models connect to the preexisting MySQL database established in the rails app from previous weeks.
@@ -38,13 +47,14 @@ https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/8
 * To retrieve the current status of a specific Elevator
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/status/8
 
-the status of these elements can be changed by using a **PUT** method to: 
+### **(PUT) Requests** - Not possile in the browser, you will need to copy the links and test It inside an app like Postman:
+* Changing the Id number to the desired elevator
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/8/status
-*changing the Id number to the desired elevator*
+* Changing the Id number to the desired column
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/columns/8/status
-*changing the Id number to the desired column*
+* Changing the Id number to the desired battery
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/batteries/8/status
-*changing the Id number to the desired battery*
+
 
 ### Specific Requests **(GET)** 
 * Retrieving a list of Elevators that are not in operation at the time of the request  
