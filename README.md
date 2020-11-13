@@ -12,7 +12,7 @@ The different models and Controllers allow us to access and modify in some cases
 
 ## 
 
- **The different end points can be tested on an application such as postman (Click on the button below):**
+ **The different end points can also be tested on an application such as postman (See the information below):**
 
 ### Batteries **(GET)**
 * To retrieve the list of all Batteries:
@@ -46,16 +46,18 @@ https://rocketelevatorsstatus-restapi.azurewebsites.net/api/columns/8/status
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/batteries/8/status
 *changing the Id number to the desired battery*
 
-3 more **GET** methods can be sent to these URLs to get specific ninformation like elevators that are not functioning, https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/not-operating
+### Specific Requests **(GET)** 
+* Retrieving a list of Elevators that are not in operation at the time of the request  
+https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/not-operating
 
-Buildings that require an intervention : 
+* Retrieving a list of Buildings that contain at least one battery, column or elevator requiring intervention
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/buildings/needing-intervention
 
-and Recent leads that have yet to be converted to customers:
+* Retrieving a list of Leads created in the last 30 days who have not yet become customers.
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/leads/open-leads
 
-they can all be accessed on a postman collection that when run will execute a sequence retrieving and changing the information before restoring for further tests. (supplied in the codeboxx deliverable)
-
+### Testing with Postman 
+* Clicking on the button will send you to the postman collection. Insode Postman you can click on the button "Runner" which will execute a sequence, retrieving and changing the information before restoring for further tests. (Supplied in the codeboxx deliverable)
 
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b5d53c3b6dfeabcc3e0c)
