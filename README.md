@@ -12,22 +12,31 @@ The different models and Controllers allow us to access and modify in some cases
 
 ## 
 
- **the different end points can be tested on an application such as postman and are:**
+ **The different end points can be tested on an application such as postman (Click on the button below):**
 
-to **GET** a list of all batteries:
+### Batteries **(GET)**
+* To retrieve the list of all Batteries:
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/batteries
-or for a specific battery, changing the number for the desired ID:
+* To retrieve all information of a specific Battery
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/batteries/8
+* To retrieve the current status of a specific Battery
+https://rocketelevatorsstatus-restapi.azurewebsites.net/api/batteries/status/8
 
-to **GET** a list of all columns:
+### Columns **(GET)**
+* To retrieve the list of all Columns:
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/columns  
-or for a specific column, changing the number for the desired ID:
+* To retrieve all information of a specific Column
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/columns/8
+* To retrieve the current status of a specific Column
+https://rocketelevatorsstatus-restapi.azurewebsites.net/api/columns/status/8
 
-to **GET** a list of all elevators:
+### Elevators **(GET)**
+* To retrieve the list of all Elevators:
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators
-or for a specific elevator, changing the number for the desired ID:
+* To retrieve all information of a specific Elevator
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/8
+* To retrieve the current status of a specific Elevator
+https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/status/8
 
 the status of these elements can be changed by using a **PUT** method to: 
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/8/status
