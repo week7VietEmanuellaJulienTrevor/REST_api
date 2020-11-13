@@ -67,7 +67,7 @@ https://rocketelevatorsstatus-restapi.azurewebsites.net/api/buildings/needing-in
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/leads/open-leads
 
 ### Testing with Postman 
-* Clicking on the button will send you to the postman collection. Insode Postman you can click on the button "Runner" which will execute a sequence, retrieving and changing the information before restoring for further tests. (Supplied in the codeboxx deliverable)
+* Clicking on the button will send you to the postman collection. Inside Postman you can click on the button "Runner" which will execute a sequence, retrieving and changing the information before restoring for further tests. (Supplied in the Codeboxx deliverable)
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/47f22848ca3c199cba2f)
 
