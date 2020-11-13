@@ -47,6 +47,21 @@ namespace Intervention_management.Controllers
             return column;
         }
 
+        // GET: api/columns/status/5
+        [HttpGet("status/{id}")]
+        public async Task<ActionResult<String>> GetColumnStatus(long id)
+        {
+            var column = await _context.columns.FindAsync(id);
+
+            if (column == null)
+            {
+                return NotFound();
+            }
+
+            return column.status;
+        }
+
+
         // GET: api/columns/not-operating
         [HttpGet("not-operating")]
         public async Task<ActionResult<IEnumerable<Column>>> GetNotOperatingColumns()
@@ -58,7 +73,7 @@ namespace Intervention_management.Controllers
         // PUT: api/columns/5/status
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}/status")]
+        [HttpPut("status/{id}")]
         public async Task<IActionResult> PutColumnStatus(long id, Column column)
         {
             var modifiedColumn = _context.columns.Where(e => e.Id == column.Id).FirstOrDefault<Column>();
