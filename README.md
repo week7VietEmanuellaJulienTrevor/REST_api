@@ -47,7 +47,7 @@ https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/8
 * To retrieve the current status of a specific Elevator
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/status/8
 
-### **(PUT) Requests** - Not possile in the browser, you will need to copy the links and test It inside an app like Postman:
+### **(PUT) Requests** - Not possible in the browser, you will need to copy the links and test It inside an app like Postman:
 * Changing the Id number to the desired elevator
 https://rocketelevatorsstatus-restapi.azurewebsites.net/api/elevators/8/status
 * Changing the Id number to the desired column
