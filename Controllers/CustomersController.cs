@@ -50,13 +50,17 @@ namespace Intervention_management.Controllers
 
             DateTime currentDate  = DateTime.Today;
             DateTime dateDelayAgo = currentDate.AddDays(-delay);
+
+            System.Console.WriteLine(dateDelayAgo);
             List<Customer> customersAll = _context.customers.ToList();
             List<Customer> recentCustomers = new List<Customer>();
 
             foreach (Customer customer in customersAll)
             {
+                System.Console.WriteLine(customer.customer_creation_date);
                 if (customer.customer_creation_date > dateDelayAgo)
                 {
+                    System.Console.WriteLine("found");
                     recentCustomers.Add(customer);
                 }
             }
