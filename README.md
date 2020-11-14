@@ -1,3 +1,4 @@
+
 ## Rocket Elevators REST API
 
 ### FALL-2020-TEAM-API-2 - Week 8 Odyssey 
@@ -69,7 +70,26 @@ https://rocketelevatorsstatus-restapi.azurewebsites.net/api/leads/open-leads
 ### Testing with Postman 
 * Clicking on the button will send you to the postman collection (Rocket-Elevator-RestAPi). Inside Postman you can click on the button "Runner" which will execute a sequence, retrieving and changing the information before restoring for further tests. (Supplied in the Codeboxx deliverable)
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/840fb1c5376e5a96b155)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/47f22848ca3c199cba2f)
 
 
+## Extra End Points
+
+the customer comtroller allows you to **GET** all the customers here : 
+https://rocketelevatorsstatus-restapi.azurewebsites.net/api/customers
+
+you can Also **GET** individual customer information by ID here (change id to desired customer )
+https://rocketelevatorsstatus-restapi.azurewebsites.net/api/customers/50
+
+You can count recent customers in recent days  (less than 100) with a **GET** request
+https://rocketelevatorsstatus-restapi.azurewebsites.net/api/customers/count-in-last-70-days
+
+You can count Customers in a specific time frame (year-month-day format) with a **GET** request 
+https://rocketelevatorsstatus-restapi.azurewebsites.net/api/customers/count-in-between-1983-10-15-and-2010-03-20
+
+You can count the products owned by a customer here : 
+**GET** https://rocketelevatorsstatus-restapi.azurewebsites.net/api/customers/customer-30-pruducts
+the list of these products can be found using the graphQL API from this repo : 
+
+https://github.com/week7VietEmanuellaJulienTrevor/GRAPHQL_API.git
 
