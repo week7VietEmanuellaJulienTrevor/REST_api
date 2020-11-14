@@ -95,6 +95,51 @@ namespace Intervention_management.Controllers
 
             return recentCustomers.Count;
         }
+        // GET: api/Customers/count-in-between-date-and-date
+        [HttpGet("customer-{id}-pruducts")]
+        public async Task<ActionResult<Dictionary<string,Int64>>> CountCustomersproducts( long id)
+        {
+            // var customers = await _context.customers.FindAsync(delay);
+
+            var customer = await _context.customers.FindAsync(id);
+
+            List<Building> buildingsAll = _context.buildings.ToList();
+            List<Building> customerBuilding = new List<Building>();
+            List<Elevator> elevatorsAll = _context.elevators.ToList();
+            List<Elevator> customerElevator = new List<Elevator>();
+
+
+            foreach( Building building in buildingsAll)
+            {
+                if (building.customer_id == id)
+                {
+                customerBuilding.Add(building);
+                }
+
+            }
+            foreach (Elevator elevator in elevatorsAll)
+            {
+                if (elevator.customer_id == id)
+                {
+                    customerElevator.Add(elevator);
+                }
+            }
+            Dictionary<string,Int64> buildingsAndElevatorsPerCustomer = new Dictionary<string, Int64>();
+
+            buildingsAndElevatorsPerCustomer.Add("Buildings", customerBuilding.Count);
+            buildingsAndElevatorsPerCustomer.Add("Elevators", customerElevator.Count);
+
+            
+            if (buildingsAndElevatorsPerCustomer == null)
+            {
+                return NotFound();
+            }
+
+            Dictionary<string,Int64> testDict = new Dictionary<string, Int64>();
+            testDict.Add("test",42);
+            return buildingsAndElevatorsPerCustomer;
+        }
+
 
         // PUT: api/Customers/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -128,33 +173,7 @@ namespace Intervention_management.Controllers
             return NoContent();
         }
 
-        // // POST: api/Customers
-        // // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        // [HttpPost]
-        // public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
-        // {
-        //     _context.customers.Add(customer);
-        //     await _context.SaveChangesAsync();
-
-        //     return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
-        // }
-
-        // // DELETE: api/Customers/5
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult<Customer>> DeleteCustomer(long id)
-        // {
-        //     var customer = await _context.customers.FindAsync(id);
-        //     if (customer == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     _context.customers.Remove(customer);
-        //     await _context.SaveChangesAsync();
-
-        //     return customer;
-        // }
+        
 
         private bool CustomerExists(long id)
         {
